@@ -2,29 +2,36 @@
 <html>
 <body>
 
-
-
 <!--Add container at top for Headline and description-->
 <div class="container">
 
-  <h1>Does the Danish Football Superliga have a Supporter Attendance Problem?</h1>
+  <h1>Does the Danish Football Superliga have a Supporter Attendance 
+  Problem?</h1>
 
-  <p>Beginning with the 2016/2017 season of the Premier Danish Football League "SuperLiga", the tournament structure and amount of teams
-  participating have been changed. <br> <br>
-  Previous seasons have been contested between 12 teams playing each other 3 times in a 33 Round tournament with highest points Team winning the 
-  championship and the 2 lowest points Teams being relegated. <br>
-  New structure includes 14 teams playing each other twice in a 26 round initial tournament, where Top 6 continue in a Championship "League" of 10 rounds
-  and Bottom 8 continue in a Relegation "League"  <br>
-  This change is targeting 2 main goals, first and foremost to increase popularity of the tournament and secondly to increase quality level of teams
-  for increased success in European Tournaments. <br> <br>
-  Initial attendance figures however are not showing an encouraging trend, below chart shows the accumulated attendance split per team/per season when all teams have played 8 matches at home. <br>
-  <i> Try clicking individual Team legends to include/exclude in the chart. </i>
+  <p>Beginning with the 2016/2017 season of the Premier Danish Football League
+   "SuperLiga", the tournament structure and amount of teams participating have
+   been changed. <br> <br>
+  Previous seasons have been contested between 12 teams playing each other 3
+   times in a 33 Round tournament where Team with highest points won the 
+  championship and the 2 Teams with lowest points were relegated. <br>
+  New structure as of 2016/2017 Season includes 14 teams playing each other 
+  twice in a 26 round initial tournament, where Top 6 teams continue in a 
+  Championship "League" of 10 rounds
+  and Bottom 8 teams continue in a Relegation "League"  <br>
+  This change is targeting 2 main goals, first and foremost to increase 
+  popularity of the tournament, which since a peak in the 2013/2014 season has 
+  seen a decrease in attendance, and secondly to increase quality level of teams
+  for increased <br> success in European Tournaments.  <br> <br>
+  Initial attendance figures however are not showing an encouraging trend, 
+  below chart shows the accumulated attendance split per team/per season when 
+  all teams have played 8 matches at home. <br>
+  <i> Try clicking individual Team legends to include/exclude in the chart, and 
+  hover over individual bars in chart to get Team specific trends</i>
   </p>
 
 <!--CSS styling container at top -->
 <style>
   
-
   .container {
   border: 1px solid #dbd6d6;
   padding-left: 15px;
@@ -38,25 +45,20 @@
   margin-top: 1px;
   }
 
-
   </style>
-
-
-
 </div>
-
-  
 
 <!--add container for chart and load d3 and dimple -->
 <div id="chartContainer">
   <meta charset="utf-8">
-  <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="http://dimplejs.org/dist/dimple.v2.2.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.2.0/dimple.latest.min.js">
+  </script>
   <script type="text/javascript">
 
   // add svg to chart container  
     var svg = dimple.newSvg("#chartContainer", 1400, 600);
-
     
       // set chart title in svg
       d3.select('svg')
@@ -69,30 +71,122 @@
             .style("font-size", "20px")
             .text("Total Attendance first 8 home games");
 
-
       // load data      
       d3.tsv("superliga_attendance.tsv", function (data) {
 
-
-        
         // Create the chart and animations
         var myChart = new dimple.chart(svg, data);
-        myChart.setBounds(60, 130, "70%", "70%")
-
-        
+        myChart.setBounds(60, 130, "70%", "70%")        
         var x = myChart.addCategoryAxis("x", "season");
-        x.addOrderRule(["2010/2011", "2011/2012", "2012/2013", "2013/2014", "2014/2015", "2015/2016", "2016/2017"]);
+        x.addOrderRule(["2010/2011", "2011/2012", "2012/2013", "2013/2014", 
+          "2014/2015", "2015/2016", "2016/2017"]);
         x.fontSize = "auto";
         var y = myChart.addMeasureAxis("y", "attendance");
         y.fontSize = "auto";
         y.title = "Accumulated Attendance in '000s";
-        myChart.addSeries(["home_team"], dimple.plot.bar);
+        var s = myChart.addSeries(['home_team'], dimple.plot.bar);
         var myLegend = myChart.addLegend(185, 82, 1000, 90);
         myLegend.fontSize = "15px";
         myChart.ease = "bounce";
         myChart.staggerDraw = true;
         
         myChart.draw(1000);
+
+        // suppress deafualt tooltip and build custom for added information
+        var tipChart = null;
+        var popup = null;
+
+        // Handle the hover and leave event - overriding the default behaviour
+        s.addEventHandler("mouseover", onHover);
+        s.addEventHandler("mouseleave", onLeave);
+
+        function onHover(e) {
+        
+        // Get the properties of the selected shape
+          var cx = parseFloat(e.selectedShape.attr("x")),
+              cy = parseFloat(e.selectedShape.attr("y")),
+              h = parseFloat(e.selectedShape.attr("height")),
+              fill = e.selectedShape.attr("fill"),
+              stroke = e.selectedShape.attr("stroke");
+        
+        // Set the size and position of the popup
+          var width = 300,
+              height = 200,
+              x = 1050;
+              y = 200
+                
+        // Fade the popup fill mixing the shape fill with 80% white
+          var popupFillColor = d3.rgb(
+                      d3.rgb(fill).r + 0.8 * (255 - d3.rgb(fill).r),
+                      d3.rgb(fill).g + 0.8 * (255 - d3.rgb(fill).g),
+                      d3.rgb(fill).b + 0.8 * (255 - d3.rgb(fill).b)
+                  );
+        
+        // Create a group for the popup objects
+          popup = svg.append("g");
+        
+        // Add a rectangle surrounding the chart
+          popup
+            .append("rect")
+            .attr("x", x + 5)
+            .attr("y", y - 5)
+            .attr("width", width)
+            .attr("height", height)
+            .attr("rx", 5)
+            .attr("ry", 5)
+            .style("fill", popupFillColor)
+            .style("stroke", stroke)
+            .style("stroke-width", 2);
+        
+        // Add the series value text
+          popup
+            .append("text")
+            .attr("x", x + 10)
+            .attr("y", y + 10)
+            .text(e.seriesValue[0])
+            .style("font-family", "sans-serif")
+            .style("font-size", 15)
+            .style("fill", stroke);
+        
+        // Filter the data for the selected brand and sku
+          // var hoverData = dimple.filterData(data, "season", e.xValue);
+          hoverData = dimple.filterData(data, "home_team", e.seriesValue);
+        
+        // Create a new mini chart of Unit Sales over Months
+          tipChart = new dimple.chart(svg,  hoverData);
+          tipChart.setBounds(x + 10, y + 30, width - 10, height - 40);
+          tipChart.addCategoryAxis("x", "season").addOrderRule(["2010/2011", 
+            "2011/2012", "2012/2013", "2013/2014", "2014/2015", "2015/2016", 
+            "2016/2017"]);
+          tipChart.addMeasureAxis("y", "attendance").hidden = true;
+        
+        // Add a bar series, this can be changed to a line, area or bubble
+        // by changing the plot parameter accordingly.
+          var popUpSeries = tipChart.addSeries("SelectedSeries", 
+            dimple.plot.bar);
+        
+        // Set the gap to 80% - just a style preference
+          popUpSeries.barGap = 0.5;
+        
+        // Set the color to the stroke color of the selected node
+          tipChart.assignColor("SelectedSeries", stroke, stroke);
+        
+        // Draw the mini chart
+          tipChart.draw();
+        
+        };
+      
+        // Event to handle mouse exit
+        function onLeave(e) {
+        // Remove the chart
+          if (tipChart !== null) {
+            tipChart._group.remove();
+          }
+          // Remove the popup
+          if (popup !== null) {
+            popup.remove();
+          }
+        };
 
         // Add total attendance for each season directly above each bar
         // Iterate every value on the x axis
@@ -102,19 +196,23 @@
               if (d && d.length) {
 
         // Get the total y value
-                var total = d3.sum(data, function (t) { return (t.season === d ? t.attendance : 0); });
+                var total = d3.sum(data, function (t) { return (t.season === d 
+                  ? t.attendance : 0); });
         // Add the text for the label
                 var label = svg.append("text");
 
         // Set the x position
         // x._scale(d) is the tick position of each element
-        // (myChart._widthPixels() / x._max) / 2 is half of the space allocated to each element
-                label.attr("x", x._scale(d) + (myChart._widthPixels() / x._max) / 2)
+        // (myChart._widthPixels() / x._max) / 2 is half of the space allocated
+        // to each element
+                label.attr("x", x._scale(d) + (myChart._widthPixels() / 
+                  x._max) / 2)
 
         // Vertically center the text on the point
                 label.attr("dy", "0.35em")
 
-        // Style the text - this can be better done with label.attr("class", "my-label-class")
+        // Style the text - this can be better done with label.attr("class", 
+        // "my-label-class")
                 label.style("text-anchor", "middle")
                   .style("font-size", "12px")
                   .style("font-family", "sans-serif")
@@ -123,18 +221,18 @@
         // Set the text itself in thousands
                 label.text(d3.format(",.1f")(total) + "k");
 
-
         // Once the style and the text is set we can set the y position
-        // y._scale(total) gives the y position of the total (and therefore the top of the top segment)
-        // label.node().getBBox().height gives the height of the text to leave a gap above the bar
+        // y._scale(total) gives the y position of the total (and therefore the 
+        // top of the top segment) label.node().getBBox().height gives the 
+        // height of the text to leave a gap above the bar
                 label.attr("y", y._scale(total) - label.node().getBBox().height)
+
+              myChart.draw(800);
+
                   }
-
-                
-
               });
-
         
+
         // This is a critical step.  By doing this we orphan the legend. This
         // means it will not respond to graph updates.  Without this the legend
         // will redraw when the chart refreshes removing the unchecked item and
@@ -159,6 +257,7 @@
         myLegend.shapes.selectAll("rect")
           // Add a click event to each rectangle
           .on("click", function (e) {
+
             // This indicates whether the item is already visible or not
             var hide = false;
             var newFilters = [];
@@ -179,10 +278,17 @@
             }
             // Update the filters
             filterValues = newFilters;
+            if (newFilters.length == 0) { 
+              svg.selectAll('g.dimple-series-group-0').selectAll('rect').remove();
+              
+            }
+
             // Filter the data
             myChart.data = dimple.filterData(data, "home_team", filterValues);
+            myChart.draw(1000);
             
-            // remove all bar labels so that they can be created again with new data based on group of legends chosen 
+            // remove all bar labels so that they can be created again with new
+            // data based on group of legends chosen 
             d3.selectAll("text:nth-child(3)").remove();
             d3.selectAll("text:nth-child(3)").remove();
             d3.selectAll("text:nth-child(3)").remove();
@@ -193,6 +299,10 @@
             d3.selectAll("text:nth-child(3)").remove();
             d3.selectAll("text:nth-child(3)").remove();
             d3.selectAll("text:nth-child(3)").remove();
+            d3.selectAll("text:nth-child(3)").remove();
+            d3.selectAll("text:nth-child(3)").remove();
+            d3.selectAll("text:nth-child(3)").remove();
+            
             
             // add legend text again as removed together with bar labels
             svg.selectAll("title_text")
@@ -208,31 +318,34 @@
 
             myChart.draw(800);    
 
-            // Repeat adding labels to each bar with totals according to chosen legends
-            // Iterate every value on the x axis
+            // Repeat adding labels to each bar with totals according to 
+            // chosen legends Iterate every value on the x axis
             x.shapes.selectAll("text").each(function (h) {
 
     // There is a dummy empty string value on the end which we want to ignore
               if (h && h.length) {
 
         // Get the total y value
-                var total = d3.sum(dimple.filterData(data, "home_team", filterValues), function (q) { 
+                var total = d3.sum(dimple.filterData(data, "home_team", 
+                  filterValues), function (q) { 
                   return (q.season === h ? q.attendance : 0); });
         
         // Add the text for the label
                 
                 var label = svg.append("text");
                 
-
         // Set the x position
         // x._scale(d) is the tick position of each element
-        // (myChart._widthPixels() / x._max) / 2 is half of the space allocated to each element
-                label.attr("x", x._scale(h) + (myChart._widthPixels() / x._max) / 2)
+        // (myChart._widthPixels() / x._max) / 2 is half of the space allocated 
+        // to each element
+                label.attr("x", x._scale(h) + (myChart._widthPixels() / 
+                  x._max) / 2)
 
         // Vertically center the text on the point
                 label.attr("dy", "0.35em")
 
-        // Style the text - this can be better done with label.attr("class", "my-label-class")
+        // Style the text - this can be better done with label.attr("class", 
+        // "my-label-class")
                 label.style("text-anchor", "middle")
                   .style("font-size", "12px")
                   .style("font-family", "sans-serif")
@@ -243,24 +356,18 @@
                 label.text(d3.format(",.1f")(total) + "k");
 
         // Once the style and the text is set we can set the y position
-        // y._scale(total) gives the y position of the total (and therefore the top of the top segment)
-        // label.node().getBBox().height gives the height of the text to leave a gap above the bar
+        // y._scale(total) gives the y position of the total (and therefore the 
+        // top of the top segment)
+        // label.node().getBBox().height gives the height of the text to leave 
+        // a gap above the bar
                 label.attr("y", y._scale(total) - label.node().getBBox().height)
 
+                myChart.draw(800);
+                
                   }
-
-              });
-
-            // Passing a duration parameter makes the chart animate. Without
-            // it there is no transition
-            
-
-            
-            
+              });   
           });
-      });
-
-
+      });  
   </script>
 
 <!-- add styling to chartcontainer and specific legend -->
@@ -275,21 +382,12 @@
   margin-bottom: 1px;
   }
 
-
-
   g.dimple-legend.dimple-extra-teams-16-17 {
   font-style: italic;
   }
 
-
   </style>
-
-
 </body>
-
-
-
-
 </div>
 
 <!-- Add container for conclusion and css styling of same -->
@@ -298,14 +396,26 @@
 
   <h2>Conclusion</h2>
 
-  <p>It is obvious from the analysis that total attendance has decreased in 2016/2017 y-o-y, despite of the new structure. This decrease even more significant when excluding the attendance for "Extra Teams 16/17" <br> so that comparison is like for like on number of teams.
-  This shows 2016/2017 attendance to be lower than any other year in the analysis. <br>
-  Digging one layer deeper it is noted that the decrease y-o-y is shared by all teams execpt for one "FC Midtjylland" <br>
-  However before conclusively labelling the new structure as a failure, it remains to be seen if the "Championship"/"Relegation" part of the new structure will be able to turn the trend when matches are of far more importance. </p>
+  <p>It is obvious from the analysis that total attendance has decreased in 
+  2016/2017 vs 2015/16, despite of the new structure. This decrease even more 
+  significant when excluding the attendance for "Extra Teams 16/17" <br> 
+  so that comparison is like for like on number of teams. This shows that not 
+  only is 2016/2017 attendance significantly lower than 2015/2016, but also 
+  lower than any other year in the analysis. <br>
+  Digging one layer deeper it is noted that the decrease 2016/2017 vs. 2015/2016
+  is shared by all teams execpt for one "FC Midtjylland" <br> <br>
+  Comparing across seasons for individual teams it is noted that 4 teams have 
+  seen increase from 2010/2011 to 2016/2017, namely "Brondby IF" / "AaB" /
+  "FC Midtjylland" / "Sonderjyske". <br> <br>  
+  Before conclusively labelling the new structure as a failure, it 
+  remains to be seen if the "Championship"/"Relegation" part of the new 
+  structure will be able to turn the trend when matches are of far more 
+  importance. <br> Furthermore since 4 teams have been able to increase over 
+  the period, more analysis on why these teams have seen growth could be 
+  beneficial for other teams to possibly copy and turn the trend as well. </p>
 
 <style>
   
-
   .bottomContainer {
   border: 1px solid #dbd6d6;
   padding-left: 15px;
@@ -320,10 +430,7 @@
   margin-bottom: 2px;
   }
 
-  
-
   </style>
-
 </div>
 
 <!-- Add container for glossary and css styling of same -->
@@ -331,12 +438,14 @@
 <div class="glossaryContainer">
 
   <h3>Glossary</h3>
-  <p><strong><i>Others: </strong></i> This Grouping is comprised of teams who have not partipated in all of the Superliga seasons included in this analysis
-  <br> <strong><i>Extra Teams 16/17: </strong></i> This Grouping is comprised of the 2 teams who, had it not been for the new structure adding to 2 teams to the Superliga, would not have participated in the 2016/2017 season</p>
+  <p><strong><i>Others: </strong></i> This Grouping is comprised of teams who 
+  have not partipated in all of the Superliga seasons included in this analysis
+  <br> <strong><i>Extra Teams 16/17: </strong></i> This Grouping is comprised 
+  of the 2 teams who, had it not been for the new structure adding to 2 teams 
+  to the Superliga, would not have participated in the 2016/2017 season</p>
 
 <style>
   
-
   .glossaryContainer {
   border: 1px solid #dbd6d6;
   padding-left: 15px;
@@ -358,12 +467,8 @@
   margin-top: 1px;
   }
 
-  
-
   </style>
-
 </div>
-
 
 <!-- Add container for logo's of all teams in the 2016/2017 Season of Superliga -->
 
@@ -390,7 +495,6 @@
 
 <style>
   
-
   .logoContainer {
   padding-left: 15px;
   padding-top: 10px;
@@ -398,13 +502,6 @@
   margin-bottom: 10px;
   }
 
-
-  
-
   </style>
-
-
 </div>  
-
-
 </html>
