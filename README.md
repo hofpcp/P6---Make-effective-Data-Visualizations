@@ -28,7 +28,7 @@ Et par småting.
   Men det er en visuel ting, som jeg måske ville synes var bedre.
 - Synes det er meget forståeligt.
 
-### Translation
+### Feedback 1 Translation
 
 From: Kim Mikkelsen
 Sent: 2. december 2016 16:37
@@ -67,3 +67,52 @@ omkring den klub du har klikket på. Som der er nu viser et click en total af al
 afhænger hvor du rammer y-axsen af den sorteting du har i dit array.
 
 
+### Feedback 2 Translation
+
+From: Jacob Vinzent [jacob_vinzent@hotmail.com]
+Sent: 7. december 2016 10:20
+T0: Peter Carsten Petersen
+Emne: Re: Superliga Attendance Visualization
+
+Hi Peter,
+
+Sorry for the late reply, i like the visualization, a few small comments:
+
+1. You should be aware that in a Stacked bar chart, it is difficult to analyse across. E.g. "Brondby IF" in 2013/2014 compared to 2015/2016. There is a %-wise big difference, but it is difficult to see. Therefore it could be an idea, to instead make a bar chart not stacked but side by side for each team/season and possibly add a circle above each group to reflect total of all teams (important a circle does not loose the ability to show trend). 
+
+2. It is a little difficult when Legend and Selection blends together. Therefore i think a listbox on the rightside of chart, where you can add/remove and always see what is included would be good. Keep legend click available as well, but have both update when one or the other is changed. Writing in the text that you have to click next to legend text, tells me it is not absolutely intuitive.
+
+3. I like the hover effect (tooltip), but you could consider having the effect present some more detail regarding the team. As is now the tooltip shows a total of team + all teams situated underneath, and what does that mean? So it depends on where you are on the y-axis and the chosen and sorted array.
+
+
+### Feedback 3
+
+CtrlAltDelForum Mentor4d
+Hi @Peter-394378,
+
+Thank you for sharing this visualization! It is well rendered, axes and legend labels are appropriately sized and I like the interactive feature.
+
+The one suggestion I would make is to enhance the explanatory nature of the visualization. I was not able to discern any particular finding when looking at this visualization. That could just be me, so please seek additional feedback rather than taking my word for it.
+
+More specifically:
+
+It is obvious from the analysis that total attendance has decreased in 2016/2017 y-o-y, despite of the new structure.
+This is not obvious to me, if I converted this into a line plot it would have a bit of a wiggle except for 2013/2014, where it would peak. Out of curiousity, what was going on in 2013/2014? Has any test been performed to determine if there is a significant difference in attendance as a function of year and/or the new structure? This isn't required, but just by eye-balling it I'm not seeing a substantial difference.
+
+Some viewers may not immediately realize what y-o-y means. Please consider spelling out year after year or use a phrase by year, or something to that effect.
+
+This decrease even more significant when excluding the attendance for "Extra Teams 16/17" so that comparison is like for like on number of teams. This shows 2016/2017 attendance to be lower than any other year in the analysis.
+That is true, once I clicked away extra teams (again, great job on that interactive feature :slight_smile: ) this clearly is the lowest attendance year. This may be something to focus on. One question I have though is now legitimate it is (I have no idea, just playing devil's advocate) to compare attendance of 12 vs. 14 teams since they are all using the same potential pool of attendees. As I know very little about this domain I don't know.
+
+Digging one layer deeper it is noted that the decrease y-o-y is shared by all teams except for one "FC Midtjylland"
+This is interesting. It does look like FC Midtjylland does not experience a substantial decrease. However, it does look like this is true of at least one other team, Aab
+
+Please consider using feedback providers to help hone in a a key finding that will stand out in the initial view of the visualization. It may be that some different design elements could bring out a finding.
+
+On a technical note, it looks like the legend toggle may not be working quite as intended. Everything works as intended unless you actually untoggle all teams. After that, the color encoding for whichever team was de-toggled last, persists.
+
+Thanks again for sharing this visualization. It would be great to see any future versions.
+
+Capture_aab.PNG1124x577 23.1 KB
+Capture_none.PNG1080x586 16.7 KB
+Capture_mix.PNG1074x576 23.8 KBCapture_mix2.PNG1090x598 24.2 KB
