@@ -117,4 +117,8 @@ Thanks again for sharing this visualization. It would be great to see any future
 ## Resources
 
 - **Data Sources:** www.superliga.dk / www.superstats.dk  
+- **Dimplejs.org code snippets:** http://dimplejs.org/advanced_examples_viewer.html?id=advanced_interactive_legends / 
+http://dimplejs.org/advanced_examples_viewer.html?id=advanced_lollipop_with_hover  
+- **stackoverflow code snippet:** http://stackoverflow.com/questions/29177336/dimple-stacked-bar-chart-adding-label-for-aggregate-total
+
 
