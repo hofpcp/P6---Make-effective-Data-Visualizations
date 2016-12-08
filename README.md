@@ -10,7 +10,10 @@ home games per season. The aim is to visualize the effect of a change in structu
 Visualization can also be viewed directly via Gist https://bl.ocks.org/hofpcp/raw/eb9e877db477327b796e7da36e85a72e/
 
 ## Design
-
+Variables
+Driving Distance in Yards: Type: Quantitative, Encoding: X Axis
+Driving accuracy in %: Quantitative, Encoding: Y Axis
+Top 10 Players: Ordered, Encoding: Color Value & Label
 
 ### Visualization updates from feedback
 - Issues with visualization when all teams were un-toggled solved
