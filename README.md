@@ -17,6 +17,7 @@ Visualization can also be viewed directly via Gist https://bl.ocks.org/hofpcp/ra
 - Abbreviations spelled out.  
 - Text updated for clearer explantion of visualization and findings on same.  
 - Tooltip altered to show team specific trend over same period as the consolidated bars. Adding further analysis opportunities to visualization.  
+
 **Feedback not included in updated visualization**
 - Fixed y-axis scale not included as adjusting y-axis is viewed as more explanatory  
 - Side by side bar chart not chosen over stacked bar chart, as main point of visualization is to show overall attendance. "Compromise" was to alter tooltip to show team specific trend  
