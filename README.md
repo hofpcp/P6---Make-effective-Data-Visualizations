@@ -113,6 +113,8 @@ On a technical note, it looks like the legend toggle may not be working quite as
 
 Thanks again for sharing this visualization. It would be great to see any future versions.
 
-![Alt text](https://cdn-enterprise.discourse.org/udacity/uploads/default/original/3X/6/b/6b50b0117e37ee86915dfa4b8b6428e95d2bb3d3.PNGCapture_none.PNG1080x586)
-16.7 KB
-Capture_mix.PNG1074x576 23.8 KBCapture_mix2.PNG1090x598 24.2 KB
+
+## Resources
+
+- **Data Sources:** www.superliga.dk / www.superstats.dk  
+
