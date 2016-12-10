@@ -19,7 +19,7 @@ Top 10 Players: Ordered, Encoding: Color Value & Label
 - Issues with visualization when all teams were un-toggled solved
 - Abbreviations spelled out.  
 - Text updated for clearer explantion of visualization and findings on same.  
-- Tooltip altered to show team specific trend over same period as the consolidated bars. Adding further analysis opportunities to visualization.  
+- Tooltip altered to show team specific trend over same period as the consolidated view, this adding further analysis opportunities to visualization.  
 
 **Feedback not included in updated visualization**
 - Fixed y-axis scale not included as adjusting y-axis is viewed as more explanatory  
