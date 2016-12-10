@@ -13,15 +13,15 @@
    been changed. <br> <br>
   Previous seasons have been contested between 12 teams playing each other 3
    times in a 33 Round tournament where Team with highest points won the 
-  championship and the 2 Teams with lowest points were relegated. <br>
+  championship and the 2 Teams with lowest points were relegated. 
   New structure as of 2016/2017 Season includes 14 teams playing each other 
   twice in a 26 round initial tournament, where Top 6 teams continue in a 
   Championship "League" of 10 rounds
-  and Bottom 8 teams continue in a Relegation "League"  <br>
+  and Bottom 8 teams continue in a Relegation "League"  <br> <br>
   This change is targeting 2 main goals, first and foremost to increase 
   popularity of the tournament, which since a peak in the 2013/2014 season has 
   seen a decrease in attendance, and secondly to increase quality level of teams
-  for increased <br> success in European Tournaments.  <br> <br>
+  for increased success in European Tournaments.  <br> <br>
   Initial attendance figures however are not showing an encouraging trend, 
   below chart shows the accumulated attendance split per team/per season when 
   all teams have played 8 matches at home. <br>
@@ -92,7 +92,8 @@
         
         myChart.draw(1000);
 
-        // suppress deafualt tooltip and build custom for added information
+        // Build custom tooltip
+        // suppress deafualt tooltip
         var tipChart = null;
         var popup = null;
 
@@ -112,8 +113,8 @@
         // Set the size and position of the popup
           var width = 300,
               height = 200,
-              x = 1050;
-              y = 200
+              x = 730;
+              y = 300
                 
         // Fade the popup fill mixing the shape fill with 80% white
           var popupFillColor = d3.rgb(
@@ -148,11 +149,10 @@
             .style("font-size", 15)
             .style("fill", stroke);
         
-        // Filter the data for the selected brand and sku
-          // var hoverData = dimple.filterData(data, "season", e.xValue);
+        // Filter the data for the selected home_team
           hoverData = dimple.filterData(data, "home_team", e.seriesValue);
         
-        // Create a new mini chart of Unit Sales over Months
+        // Create a new mini chart of Attendance over seasons
           tipChart = new dimple.chart(svg,  hoverData);
           tipChart.setBounds(x + 10, y + 30, width - 10, height - 40);
           tipChart.addCategoryAxis("x", "season").addOrderRule(["2010/2011", 
@@ -160,12 +160,11 @@
             "2016/2017"]);
           tipChart.addMeasureAxis("y", "attendance").hidden = true;
         
-        // Add a bar series, this can be changed to a line, area or bubble
-        // by changing the plot parameter accordingly.
+        // Add a bar series to the minichart
           var popUpSeries = tipChart.addSeries("SelectedSeries", 
             dimple.plot.bar);
         
-        // Set the gap to 80% - just a style preference
+        // Set the gap to 50%
           popUpSeries.barGap = 0.5;
         
         // Set the color to the stroke color of the selected node
@@ -211,21 +210,17 @@
         // Vertically center the text on the point
                 label.attr("dy", "0.35em")
 
-        // Style the text - this can be better done with label.attr("class", 
-        // "my-label-class")
+        // Styling of label text
                 label.style("text-anchor", "middle")
                   .style("font-size", "12px")
                   .style("font-family", "sans-serif")
                   .style("opacity", 0.8)
 
-        // Set the text itself in thousands
+        // Set the text itself
                 label.text(d3.format(",.1f")(total) + "k");
 
-        // Once the style and the text is set we can set the y position
-        // y._scale(total) gives the y position of the total (and therefore the 
-        // top of the top segment) label.node().getBBox().height gives the 
-        // height of the text to leave a gap above the bar
-                label.attr("y", y._scale(total) - label.node().getBBox().height)
+        // Set y postion relative to total per season and slightly above bar
+              label.attr("y", y._scale(total) - label.node().getBBox().height)
 
               myChart.draw(800);
 
@@ -285,8 +280,8 @@
 
             // Filter the data
             myChart.data = dimple.filterData(data, "home_team", filterValues);
-            myChart.draw(1000);
-            
+            // myChart.draw(1000);
+
             // remove all bar labels so that they can be created again with new
             // data based on group of legends chosen 
             d3.selectAll("text:nth-child(3)").remove();
@@ -303,7 +298,6 @@
             d3.selectAll("text:nth-child(3)").remove();
             d3.selectAll("text:nth-child(3)").remove();
             
-            
             // add legend text again as removed together with bar labels
             svg.selectAll("title_text")
               .data(["Click legend to","show/hide owners:"])
@@ -318,10 +312,11 @@
 
             myChart.draw(800);    
 
+
             // Repeat adding labels to each bar with totals according to 
             // chosen legends Iterate every value on the x axis
             x.shapes.selectAll("text").each(function (h) {
-
+            
     // There is a dummy empty string value on the end which we want to ignore
               if (h && h.length) {
 
@@ -330,8 +325,7 @@
                   filterValues), function (q) { 
                   return (q.season === h ? q.attendance : 0); });
         
-        // Add the text for the label
-                
+        // Add the text for the label    
                 var label = svg.append("text");
                 
         // Set the x position
@@ -344,23 +338,23 @@
         // Vertically center the text on the point
                 label.attr("dy", "0.35em")
 
-        // Style the text - this can be better done with label.attr("class", 
-        // "my-label-class")
+        // Styling of the text
                 label.style("text-anchor", "middle")
                   .style("font-size", "12px")
                   .style("font-family", "sans-serif")
                   .style("opacity", 0.8)
 
-        // Set the text itself in thousands
-                
+        // Set the text 
                 label.text(d3.format(",.1f")(total) + "k");
 
-        // Once the style and the text is set we can set the y position
-        // y._scale(total) gives the y position of the total (and therefore the 
-        // top of the top segment)
-        // label.node().getBBox().height gives the height of the text to leave 
-        // a gap above the bar
-                label.attr("y", y._scale(total) - label.node().getBBox().height)
+        // Set the y postion according to total per bar and slightly above
+                if (typeof y._scale !== 'undefined') {
+                  var yScale = y._scale(total) - label.node().getBBox().height
+                } else {
+                  var yScale = 135
+                }
+
+                label.attr("y", yScale)
 
                 myChart.draw(800);
                 
@@ -396,7 +390,7 @@
 
   <h2>Conclusion</h2>
 
-  <p>It is obvious from the analysis that total attendance has decreased in 
+  <p>It is obvious from the figures that total attendance has decreased in 
   2016/2017 vs 2015/16, despite of the new structure. This decrease even more 
   significant when excluding the attendance for "Extra Teams 16/17" <br> 
   so that comparison is like for like on number of teams. This shows that not 
@@ -406,13 +400,28 @@
   is shared by all teams execpt for one "FC Midtjylland" <br> <br>
   Comparing across seasons for individual teams it is noted that 4 teams have 
   seen increase from 2010/2011 to 2016/2017, namely "Brondby IF" / "AaB" /
-  "FC Midtjylland" / "Sonderjyske". <br> <br>  
-  Before conclusively labelling the new structure as a failure, it 
-  remains to be seen if the "Championship"/"Relegation" part of the new 
-  structure will be able to turn the trend when matches are of far more 
-  importance. <br> Furthermore since 4 teams have been able to increase over 
-  the period, more analysis on why these teams have seen growth could be 
-  beneficial for other teams to possibly copy and turn the trend as well. </p>
+  "FC Midtjylland" / "Sonderjyske". Surprising in this particular group  
+  is the significant increase by "Sonderjyske" who for a number of years 
+  leading up to the 2015/2016 season ended every season very close to 
+  relegation. In 2015/2016 they turned performance around, started the
+  season strong and improved momentum throughout to end in 2nd place, this 
+  performance boost the most likely reason for their increase in attendance.
+  <br> <br> Of the remaining teams "FC Copenhagen" / "OB" / "FC Nordsjaelland" 
+  have seen significant decline in the last 1-3 seasons, it is speculated that 
+  since "FC Copenhagen" is also participating in the UEFA 
+  Champions League this season, fans are more likely to choose these games 
+  over current games in Superliga, and for "OB" and "FC Nordsjaelland" poor 
+  performance in the last couple of years can be the obvious reason for 
+  decline. <br> <br>   
+  Fan culture can be a difficult subject to make absolute conclusions on, 
+  interest and attendance can be influenced by many factors, such as high 
+  profile signings, current performance, strength of opponent and even the 
+  weather. Therefore before conclusively labelling the new structure as a 
+  failure, it should be investigated if possible if other factors can have 
+  resulted in a momentary decline, as well as allowing the "Championship"/
+  "Relegation" part of the new structure to play out, to see if that will 
+  be able to turn the trend, when matches are of far more importance. <br>  
+  </p>
 
 <style>
   
@@ -442,7 +451,9 @@
   have not partipated in all of the Superliga seasons included in this analysis
   <br> <strong><i>Extra Teams 16/17: </strong></i> This Grouping is comprised 
   of the 2 teams who, had it not been for the new structure adding to 2 teams 
-  to the Superliga, would not have participated in the 2016/2017 season</p>
+  to the Superliga, would not have participated in the 2016/2017 season
+  <br><strong><i>Data Sources: </strong></i> www.superliga.dk / 
+  www.superstats.dk</p>
 
 <style>
   
