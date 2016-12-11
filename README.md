@@ -16,10 +16,10 @@ Main aim was changed to instead of showing per team, to start with an accumulate
 
 ### Visual Encoding  
 <strong>Attendance accumulated</strong> Type: Quantitative, Encoding: Y Axis, Chart Type: Stacked Bar chart with total value above each bar.  
-Seasons Type: Ordered, Encoding: Y Axis  
-Individual Teams Type: Categorical, Encoding: Color Value & Label  
-Animation provided on initial view and each change of visualization to draw attention to changing data.  
-Interactivity provided via "clicking" individual teams on/off in Stacked Bar chart, and on "Hover" showing new bar chart specific for Team chosen.  
+<strong>Seasons</strong> Type: Ordered, Encoding: X Axis  
+<strong>Individual Teams</strong> Type: Categorical, Encoding: Color Value & Label  
+<strong>Animation</strong> provided on initial view and each change of visualization to draw attention to changing data.  
+<strong>Interactivity</strong> provided via "clicking" individual teams on/off in Stacked Bar chart, and on "Hover" showing new bar chart specific for Team chosen.  
 
 ### Visualization updates from feedback
 - Issues with visualization when all teams were un-toggled solved
