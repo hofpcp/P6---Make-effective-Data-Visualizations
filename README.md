@@ -7,25 +7,25 @@ Peter Carsten Petersen
 The presented visualization is an explanatory overview of the combined attendance for the Danish Premier Football League "Superliga", for
 seasons 2010/2011 to 2016/2017. The data is presented as accumulated attendance data for participating teams for their respective first 8 
 home games per season. The aim is to visualize the effect of a change in structure of tournament beginning with the 2016/2017 season. 
-Visualization can also be viewed directly via Gist https://bl.ocks.org/hofpcp/eb9e877db477327b796e7da36e85a72e
+This Visualization can also be viewed directly via Gist https://bl.ocks.org/hofpcp/eb9e877db477327b796e7da36e85a72e
 
 ## Design
 Variables
-Driving Distance in Yards: Type: Quantitative, Encoding: X Axis
-Driving accuracy in %: Quantitative, Encoding: Y Axis
-Top 10 Players: Ordered, Encoding: Color Value & Label
+Attendance accumulated: Type: Quantitative, Encoding: Y Axis, Chart Type: Stacked Bar chart
+Seasons: Quantitative, Encoding: Y Axis
+Individual Teams: Categorical, Encoding: Color Value & Label
 
 ### Visualization updates from feedback
 - Issues with visualization when all teams were un-toggled solved
 - Abbreviations spelled out.  
 - Text updated for clearer explantion of visualization and findings on same.  
-- Tooltip altered to show team specific trend over same period as the consolidated view, this adding further analysis opportunities to visualization.  
+- Tooltip altered to show team specific trend over same period as the accumulated view, this adding a further analysis opportunity on the visualization.  
 
 **Feedback not included in updated visualization**
-- Fixed y-axis scale not included as adjusting y-axis is viewed as more explanatory  
+- Fixed y-axis scale not included as the adjusting y-axis scale is viewed as more explanatory.  
 - Side by side bar chart not chosen over stacked bar chart, as main point of visualization is to show overall attendance. "Compromise" was to alter tooltip to show team specific trend  
 - Listbox instead of legend not chosen, as I believe the legend works equally well
-
+- Omitting "Extra Teams 16/17" in initial wiew not included, as there is much value in the initial information when including in initial view.
 
 
 
