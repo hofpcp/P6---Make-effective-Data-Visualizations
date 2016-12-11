@@ -12,12 +12,14 @@ This Visualization can also be viewed directly via Gist https://bl.ocks.org/hofp
 ## Design
 Initial thoughts for this visualization was to do a line chart over the periods. 1 line per team with specified points per match, but it quickly became apparent from the data collection, that this would lead to a very messy and low information visulization, as there are many teams with comparable attendance figures, where lines would overlap and big differences between individual matches depending very much on the strength of opponent, i.e. many peaks and valleys with no visually clear trends.  
 
+Main aim was changed to instead of showing per team, to start with an accumulated view instead, where the per team information could also be viewed/analyzed. A stacked chart is best at conveying these two aim's, and after comparing Stacked "Bubble"/"Line"/"Area"/"Bar", I decided that the Stacked bar chart was the best visual represenation of information. After feedback, the "Tooltip" was altered to show individual team data over same period, as this is not easily observed in the stacked chart.  
 
-
-Variables
-Attendance accumulated: Type: Quantitative, Encoding: Y Axis, Chart Type: Stacked Bar chart
-Seasons: Quantitative, Encoding: Y Axis
+### Visual Encoding  
+Attendance accumulated: Type: Quantitative, Encoding: Y Axis, Chart Type: Stacked Bar chart with total value above each bar.
+Seasons: Ordered, Encoding: Y Axis
 Individual Teams: Categorical, Encoding: Color Value & Label
+Animation provided on initial view and each change of visualization to draw attention to changing data.
+Interactivity provided via "clicking" individual teams on/off in Stacked Bar chart, and on "Hover" showing new bar chart specific for Team chosen.  
 
 ### Visualization updates from feedback
 - Issues with visualization when all teams were un-toggled solved
