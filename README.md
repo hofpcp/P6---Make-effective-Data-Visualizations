@@ -15,10 +15,10 @@ Initial thoughts for this visualization was to do a line chart over the periods.
 Main aim was changed to instead of showing per team, to start with an accumulated view instead, where the per team information could also be viewed/analyzed. A stacked chart is best at conveying these two aim's, and after comparing Stacked "Bubble"/"Line"/"Area"/"Bar", I decided that the Stacked bar chart was the best visual represenation of information. After feedback, the "Tooltip" was altered to show individual team data over same period, as this is not easily observed in the stacked chart.  
 
 ### Visual Encoding  
-Attendance accumulated: Type: Quantitative, Encoding: Y Axis, Chart Type: Stacked Bar chart with total value above each bar.
-Seasons: Ordered, Encoding: Y Axis
-Individual Teams: Categorical, Encoding: Color Value & Label
-Animation provided on initial view and each change of visualization to draw attention to changing data.
+Attendance accumulated: Type: Quantitative, Encoding: Y Axis, Chart Type: Stacked Bar chart with total value above each bar.  
+Seasons: Type: Ordered, Encoding: Y Axis  
+Individual Teams: Type: Categorical, Encoding: Color Value & Label  
+Animation provided on initial view and each change of visualization to draw attention to changing data.  
 Interactivity provided via "clicking" individual teams on/off in Stacked Bar chart, and on "Hover" showing new bar chart specific for Team chosen.  
 
 ### Visualization updates from feedback
