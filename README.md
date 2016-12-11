@@ -135,6 +135,17 @@ On a technical note, it looks like the legend toggle may not be working quite as
 
 Thanks again for sharing this visualization. It would be great to see any future versions.
 
+### Feedback 3 - Second Review
+
+CtrlAltDelForum Mentor4d
+Hi @Peter-394378,
+
+Thanks for giving me the opportunity to give feedback on this version of the visualization. I do think it has improved. Well done! I really like the tooltip, it is very helpful. The tooltip is all the way over to the right side of the plot, which means it gets cut off on small screens, like my netbook (I can scroll over to see it). I'm not sure if there is a better place to put it, but I thought I would make you aware of it. I did notice that when you de-select all teams and bring them back up, at some point the values on top of the plots disappear.
+
+I do think the visualization would benefit from altering the conclusions or bringing out other aspects of the data, per the comments in my first response post. Through exploration I noticed some teams were disproportionately impacted by the change.
+
+From my perspective I don't see a substantial decrease from 2014/2015 to 2016/2017. From the plot it looks like this is aligned with the year to year trend. It may be good to show an initial view where the extra teams are removed to bring out this decrease. Once again this could just be me, so please see what other feedback providers think. You could focus the visualization on teams that are disproportionately affected as well. I'm wondering why this is? What causes some teams to be more impacted than others?
+
 
 ## Resources
 
