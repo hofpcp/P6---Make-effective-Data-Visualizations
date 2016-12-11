@@ -10,6 +10,10 @@ home games per season. The aim is to visualize the effect of a change in structu
 This Visualization can also be viewed directly via Gist https://bl.ocks.org/hofpcp/eb9e877db477327b796e7da36e85a72e
 
 ## Design
+Initial thoughts for this visualization was to do a line chart over the periods. 1 line per team with specified points per match, but it quickly became apparent from the data collection, that this would lead to a very messy and low information visulization, as there are many teams with comparable attendance figures, where lines would overlap and big differences between individual matches depending very much on the strength of opponent, i.e. many peaks and valleys with no visually clear trends.  
+
+
+
 Variables
 Attendance accumulated: Type: Quantitative, Encoding: Y Axis, Chart Type: Stacked Bar chart
 Seasons: Quantitative, Encoding: Y Axis
